@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app1">
+			<ol>
+				<li v-for="tool in tools">
+					{{ tool }} {{ tool.name }}
+				</li>
+			</ol>
+			<input v-model="newTool.name" placeholder="输入名字" />
+			<input v-model="newTool.amount" placeholder="输入数量"/>
+			<p>newTool is {{ newTool.name }} {{ newTool.amount }}</p>
+			<br />
+			
+			<div>
+				<input type=checkbox id="jack" value='jack' v-model='checkedNames'>
+				<label for="jack">Jack</label>				
+				<input type=checkbox id="john" value='john' v-model='checkedNames'>
+				<label for="john">John</label>				
+				<input type=checkbox id="mike" value='mike' v-model='checkedNames'>
+				<label for="mike">Mike</label>				
+				<br>
+				<span>Checked names: {{ checkedNames }}</span>
+			</div>
+			<br />
+			<div>
+				<input id='one' value='One' name="one" type="radio" v-model="picked">
+				<label for='one'>One</label>
+				<br>
+				<input id='two' value='Two' name="two" type="radio" v-model="picked">
+				<label for='two'>Two</label>
+				<br />
+				<span>Picked: {{ picked }}</span>
+			</div>
+			
+			<br>
+			<div>
+				<button type="button" class="mui-btn mui-btn-blue" @click="submit1">增加newTool</button>
+			</div>
+	
+			<br />
+			<div>
+				<my-component-1 @clicknow='clicknow' :title="picked"></my-component-1>
+			</div>
+			
+			<br>
+			<div>
+				<my-component-2 v-for="tool in tools" :item='tool'></my-component-2>
+			</div>
+			
+		</div>
+		<script>
+			Vue.component("my-component-1",{
+				props: ['title'],
+				data: function(){
+					return { count: 0}
+				},
+				template: '<button v-on:click="countadd1"> {{title}}: You clicked me {{ count }} times </button>',
+				methods: {
+					countadd1() {
+						this.count++;
+						this.$emit('clicknow', this.count);
+					}
+				},
+			})
+			
+			Vue.component("my-component-2",{
+				props: ['item'],
+				template: '<li >id: {{ item.name }}   value: {{item.amount}}</li>'
+			})
+			var app1 = new Vue({
+				el: '#app1',
+				data: {
+					tools: [{name: "扳手", amount: 2},
+						{name: "钳子", amount:3}],
+					newTool: {name: "", amount: null},
+					checkedNames: [],
+					picked: "One"
+ 				},
+				methods: {
+					submit1(){
+						console.log(this.picked);
+						this.tools.push({name: this.newTool.name, amount: this.newTool.amount});
+					},
+					clicknow(a){
+						console.log(a)
+					}
+				}
+			})
+		</script>
+		
+	</body>
+</html>
