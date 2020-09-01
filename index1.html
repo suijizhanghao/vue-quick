@@ -12,15 +12,20 @@
 			<span v-once>{{ message }}</span>
 			<br>
 			<span v-html="message"></span>
-			
-		
+			<br>
+			<p>{{ randomidd }}</p>
+			<br>
+			<div>
+				<button type="button" class="mui-btn mui-btn-blue" @click='changecolor'>按钮</button>
+			</div>
 		</div>
 		
 		<script type="text/javascript">
 			var vm = new Vue({
 				el: '#app',
 				data: {
-					message: "myfun"
+					message: "myfun",
+					randomidd: 1
 				},
 				created() {
 					console.log('a is :' + this.message)
@@ -36,6 +41,11 @@
 				},
 				updated() { //? 值没有改变的话，有没有rerender patch
 					console.log('updated')
+				},
+				methods: {
+					changecolor() {
+						this.randomidd = Math.ceil(Math.random()*10)
+					}
 				}
 			})
 			vm.m1 = 1	//和接口文档上竟然不一致
