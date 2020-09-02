@@ -18,6 +18,12 @@
 			<div>
 				<button type="button" class="mui-btn mui-btn-blue" @click='changecolor'>按钮</button>
 			</div>
+			<div>
+				<button type="button" class="mui-btn mui-btn-blue mui-btn-block" v-bind:disabled="isDisabled">按钮</button>
+			</div>
+			<div class="color">
+				颜色测试
+			</div>
 		</div>
 		
 		<script type="text/javascript">
@@ -25,7 +31,9 @@
 				el: '#app',
 				data: {
 					message: "myfun",
-					randomidd: 1
+					randomidd: 1,
+					isDisabled: false,
+					color: 'red'
 				},
 				created() {
 					console.log('a is :' + this.message)
@@ -45,12 +53,19 @@
 				methods: {
 					changecolor() {
 						this.randomidd = Math.ceil(Math.random()*10)
+						if (this.randomidd %2 == 0) {
+							this.isDisabled = true
+						} else {
+							this.isDisabled = false
+						}
 					}
 				}
 			})
 			vm.m1 = 1	//和接口文档上竟然不一致
 		</script>
-		
+		<style type="text/css">
+			.red {color:red;}
+		</style>
 		
 	</body>
 </html>
