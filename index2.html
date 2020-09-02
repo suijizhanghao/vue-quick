@@ -7,28 +7,40 @@
 	</head>
 	<body>
 		<div id='app'>
-			<p v-bind:title="k2"> {{k1}} {{ kk1 }}</p>
+			<p v-bind:title="k2"> {{k1}} </p>
 			<p v-if="k1 > 'aa'"> AAA </p>
 			<p v-else-if="k1 < 'aa'"> BBB </p>
-			<div v-bind:class>
-				
-			</div>
+			<div class="共存" v-bind:class="{active: isActive, errorclass: isError}">CCC</div>
+			<div v-bind:class="classObject">DDD</div>
+			<div v-bind:class="jisuanObject">EEE</div>
 		</div>
 		<script>
-			const app = new Vue({
+			var vm = new Vue({
 				el: '#app',
 				data: {
 					k1: 'aaa',
-					k2: new Date().toGMTString()
+					k2: new Date().toGMTString(),
+					isActive: true,
+					isError: false,
+					classObject: {	// 以key作为class的名字
+						active: true,
+						errorClass: true
+					}
+				},
+				computed:{
+					jisuanObject: function() {	//和上面的效果是一样的，应当是常用的方式
+						return {
+							active: true,
+							errorCLASS: true
+						}
+					}
 				}
 			})
-			app.k1 = "bbb"
-			app.kk1 = 'v3'
-			app.kk1 = "tet"
-			app.$watch('k1', function(newValue, oldValue){
+			vm.k1 = "bbb"
+			
+			vm.$watch('k1', function(newValue, oldValue){
 				console.log(oldValue)
 			})
-			app.$watch()
 		</script>
 		
 	</body>
