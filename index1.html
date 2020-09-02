@@ -12,6 +12,7 @@
 			<span v-once>{{ message }}</span>
 			<br>
 			<span v-html="message"></span>
+			<input type="text" name="message" id="message" v-model="message" />
 			<br>
 			<p>{{ randomidd }}</p>
 			<br>
@@ -21,9 +22,26 @@
 			<div>
 				<button type="button" class="mui-btn mui-btn-blue mui-btn-block" v-bind:disabled="isDisabled">按钮</button>
 			</div>
-			<div class="color">
+			<div v-bind:class="color">
 				颜色测试
 			</div>
+			<span >
+				{{ randomidd + 100 }}
+			</span>
+			
+			<br>
+			<div @click='click2'>
+				<div @click.stop='click1'>
+					do a click
+				</div>
+			</div>
+			<input v-model="attiname" />
+			<input v-model="attivalue" />
+			<span :[attiname]="attivalue">
+				纯动态的
+			</span>
+			<br>
+			<span>{{ message_r }}</span>
 		</div>
 		
 		<script type="text/javascript">
@@ -33,7 +51,22 @@
 					message: "myfun",
 					randomidd: 1,
 					isDisabled: false,
-					color: 'red'
+					color: 'red',
+					attiname: '',
+					attivalue: ''
+				},
+				computed: {
+					message_r: {
+						get: function() {
+							console.log('message_r function')
+							return this.message.substring(2,500)
+							},
+						set: function(val) {
+							this.message = 'aaa' + val
+							// 确实可以写个dead for 出来
+							// this.message_r ='bbb'
+						}
+					}
 				},
 				created() {
 					console.log('a is :' + this.message)
@@ -58,6 +91,13 @@
 						} else {
 							this.isDisabled = false
 						}
+						this.color = ['red', 'blue'][this.randomidd % 2]
+					},
+					click1() {
+						console.log('click1')
+					},
+					click2(){
+						console.log('click2')
 					}
 				}
 			})
@@ -65,6 +105,7 @@
 		</script>
 		<style type="text/css">
 			.red {color:red;}
+			.blue{color:blue;}
 		</style>
 		
 	</body>
