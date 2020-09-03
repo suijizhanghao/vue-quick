@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id='app'>
+			<h3 v-if="a>6">if</h3>
+			<p v-else-if="a <3">else if</p> <!-- if 和else 可以使用不同的 标签 -->
+			<h3 v-else> else</h3>
+			
+			<span>请输入条件的值：</span><input type="text" name="avlue" id="avlue" value="" v-model="a" />
+			
+			<br>
+			<template v-if="a>6">
+				<p>template 代码块，并且不会渲染template</p>
+			</template>
+			
+			<template v-if="loginType == 'username'">
+				<label>请输入：</label>	
+				<input placeholder="Enter your username" v-model='username'/>
+			</template>
+			<template v-else>
+				<label>请输入：</label> <!-- vue确实会尽可能的避免重绘重排，这个不会跟随if改动，牛 -->
+				<input placeholder="Enter your email" v-model="email"/>
+			</template>
+			<button type="button" @click="changeloginmodel">切换登录方式</button>
+			<br>
+			<template v-if="loginType == 'username'">
+				<label key='key1'>请输入：</label>	<!-- 因为输入了key，那么这个会被重新加载 -->
+				<input placeholder="Enter your username" v-model='loginvalue' />
+			</template>
+			<template v-else>
+				<label key='key2'>请输入：</label>  	<!-- 如果key2改为key1，那么也不会改变；估计内部有一个默认的key值，估计是hash值 -->
+				<input placeholder="Enter your email" v-model="loginvalue"/>
+			</template>
+			<button type="button" @click="changeloginmodel" >切换登录方式1</button>
+			
+			<br>
+			<p v-show='showitornot'>show or not</p>
+		</div>
+		<script>
+			
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					a: 5,
+					loginType: 'username',
+					username: '',
+					email: '',
+					loginvalue: '',
+					showitornot: true
+				},
+				computed:{
+					
+				},
+				methods: {
+					changeloginmodel(){
+						this.loginType = (this.loginType == "username") ? 'email': 'username'
+					}
+				}
+			})
+		</script>
+		
+	</body>
+</html>

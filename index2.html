@@ -13,8 +13,18 @@
 			<div class="共存" v-bind:class="{active: isActive, errorclass: isError}">CCC</div>
 			<div v-bind:class="classObject">DDD</div>
 			<div v-bind:class="jisuanObject">EEE</div>
+			<div v-bind:class="[c1, c2]">FFF</div>
+			<div v-bind:class="[{c3class: isC3true}, c4]">GGG</div>
+			<mycomponent-1 v-bind:class="{active: isActive}"></mycomponent-1>
+			<div v-bind:style="{color: color}">styletest1</div>
+			<div v-bind:style="styleObject2">styletest2</div>
+			<div v-bind:style="styleObject3">styletest3</div>
+			<div v-bind:style="[baseStyles, overridingStyles]">styletest4</div>
 		</div>
 		<script>
+			Vue.component('mycomponent-1',{
+				 template: "<p class='mycomponent-1class'>this is mycomponent-1</p>"
+			});
 			var vm = new Vue({
 				el: '#app',
 				data: {
@@ -25,7 +35,18 @@
 					classObject: {	// 以key作为class的名字
 						active: true,
 						errorClass: true
-					}
+					},
+					c1: 'c1class',
+					c2: 'c2class',
+					isC3true: true,
+					c4: 'c4class',
+					color: 'red',	// 对象的方式，和class的绑定是不同的，还是使用object或者计算属性比较相似
+					styleObject2: {
+						color: 'red',
+						fontSize: '13px'
+					},
+					baseStyles: {color:'red'},	//style只能绑定object
+					overridingStyles: {fontSize: '13px'}
 				},
 				computed:{
 					jisuanObject: function() {	//和上面的效果是一样的，应当是常用的方式
@@ -33,7 +54,14 @@
 							active: true,
 							errorCLASS: true
 						}
+					},
+					styleObject3: function() {
+						return {
+							color: 'blue',
+							fontSize: '13px'
+						}
 					}
+					
 				}
 			})
 			vm.k1 = "bbb"

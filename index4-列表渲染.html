@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id='app'>
+			<li v-for="(item, index) in items">
+				{{ somekey }} -- {{index}} -- {{ item.name }} -- {{ item.age}}
+			</li>
+			<br>
+			<li v-for="(item, index) in items">
+				{{ somekey }} -- {{index}} -- {{ item.name }}
+			</li>
+			<p v-for="(value,name,index) in aobject">{{ value }} -- {{ name }} -- {{ index }}</p>
+			<br>
+			<li v-for="item in items" v-bind:key='item.age' >{{ item.name}} -- {{ item.age }}</li>
+			<li v-for="item in items_compu">{{ item }}</li>
+			
+			<br>
+			<!-- 可以使用两层的for -->
+			<ul v-for="for1 in for1s">
+				<li v-for="for2 in somefunc(for1)">
+					{{ for2 }}
+				</li>
+			</ul>
+			<br>
+			<li v-for='i in 10'>{{ i }}</li>
+			
+			<div>
+				<template v-for="item in items">
+					<li>{{ item.name }}</li>
+					<li class="divider" role="presentation"></li>
+				</template>
+			</div>
+		</div>
+		<script>
+			
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					items: [{name: 'item1', age:11 },
+					{name: 'item2', age:2},
+					{name: 'item3', age:33 }],
+					somekey: 'somevalue',
+					aobject: {
+						b: 'bb',
+						c: 'cc',
+						a: 'aa'
+					},
+					for1s: [[2,1,3],[22,11,33]]
+				},
+				
+				computed:{
+					items_compu: function(){
+						 return this.items.filter(function (x) {
+						      return x.age % 2 == 0 })
+					}
+				},
+				methods: {
+					somefunc: function(x) {
+						return x.filter(function (xx) {
+						      return xx >2 })
+					}
+				},
+				updated() {
+					console.log('updated')
+				}
+			})
+		</script>
+		
+	</body>
+</html>
