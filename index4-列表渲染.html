@@ -35,9 +35,14 @@
 					<li class="divider" role="presentation"></li>
 				</template>
 			</div>
+			<br>
+			<mycomponent v-for="item in items" v-bind:key="item.name" :key1="item.name" v-bind:value="item.age"></mycomponent>
 		</div>
 		<script>
-			
+			Vue.component("mycomponent", {
+				props: [ 'key1', 'value'],
+				template:"<p> this is mycomponent: {{ key1 }} {{ value }}</p>"
+			});
 			var vm = new Vue({
 				el: '#app',
 				data: {
