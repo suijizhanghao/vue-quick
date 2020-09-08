@@ -37,3 +37,11 @@
 - 函数中的event是原生DOM事件，好似无论什么情况下都会存在；无论是否增加这个参数，真是奇怪。
 - 但是直接调用函数，则不会有event变量
 - event如果作为参数传递，那么可以使用$event; 函数内部使用的event就是参数的$event；类似data 和 $data 使用的位置不同
+- v-on:click.stop 阻止传播
+- v-on:click.prevent 阻止表单提交
+- click修饰符可以串联： v-on:click.stop.preventv-on:click.stop.prevent
+- v-on:click.capture 改变冒泡顺序，优先触发capture，再处理内部的东东；是不是适合拦截功能？
+- stop 可以阻止capture
+- v-on:submit 只能用在表单中，其他地方不好使
+- 表单不提交： v-on:click.prevent  用于非form中； v-on:submit.prevent v-on:submit.prevent="xxx"用于form中
+- 

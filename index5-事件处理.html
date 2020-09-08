@@ -11,6 +11,49 @@
 			<button @click="count += 1">按钮+1</button>
 			<button @click="click1()">按钮1</button>
 			<button @click='click2($event, "aaa")'>按钮2</button>
+			<br>
+			<dir @click="doa">
+				<dir @click="dob">
+					<button type="button">一个按钮</button>
+				</dir>
+			</dir>
+			<dir @click="doa">
+				<dir @click.stop="dob">
+					<button type="button">一个按钮</button>
+				</dir>
+			</dir>
+			<dir @click="doa">
+				<dir @click.stop="dob">
+					<button type="button">一个按钮</button>
+				</dir>
+			</dir>
+			<form action="" method="post">
+				<!-- 只针对这个form生效，写在哪里都行 -->
+				<input type="submit" value="提交1"  v-on:click.prevent="dob"/>
+			</form>
+			
+			<form action="" method="post">
+				<div @click="doa">
+					<input type="submit" value="提交2"  v-on:click.prevent.stop="dob"/>
+				</div>
+			</form>
+
+			<!-- stop可以组织capture -->
+			<form action="" method="post" @click="doa">
+				<div>
+					<input type="submit" value="提交3"  v-on:click.prevent.stop="dob"/>
+				</div>
+			</form>
+			<form action="" method="post" v-on:submit.prevent="doa">
+				<div>
+					<input type="submit" value="提交31"  v-on:click="dob"/>
+				</div>
+			</form>
+			<div action="" method="post" @click.capture="doa">
+				<div>
+					<input type="submit" value="提交4"  v-on:click="dob"/>
+				</div>
+			</div>		
 		</div>
 		<script>
 			var vm = new Vue({
@@ -31,6 +74,12 @@
 							event.preventDefault()
 						}
 						console.log(msg)
+					},
+					doa(){
+						console.log('do a')
+					},
+					dob() {
+						console.log('do b')
 					}
 					
 					
