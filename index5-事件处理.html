@@ -49,13 +49,31 @@
 					<input type="submit" value="提交31"  v-on:click="dob"/>
 				</div>
 			</form>
-			<div action="" method="post" @click.capture="doa">
-				<div>
-					<input type="submit" value="提交4"  v-on:click="dob"/>
+			<div @click.capture="doc">
+				<div action="" method="post" @click.capture="doa">
+					<div>
+						<input type="submit" value="提交4"  v-on:click="dob"/>
+					</div>
 				</div>
-			</div>		
+			</div>
+			<div @click="doc">
+				<div action="" method="post" @click.self="doa">
+					<div>
+						<input type="submit" value="提交5"  v-on:click.self="dob"/>
+					</div>
+				</div>
+			</div>
+			<div @click.once='doa'>
+				aaa
+			</div>
+			<!-- 阻止默认行为，包括表单和a等-->
+			<a href="https://www.baidu.com" @click.prevent="doa">tobaidu </a>
+			
+			<input v-on:keyup.enter='doa'>
+			</input>
 		</div>
 		<script>
+	
 			var vm = new Vue({
 				el: '#app',
 				data: {
@@ -80,8 +98,10 @@
 					},
 					dob() {
 						console.log('do b')
+					},
+					doc() {
+						console.log('do c')
 					}
-					
 					
 				},
 				updated() {
