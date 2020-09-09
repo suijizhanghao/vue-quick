@@ -51,8 +51,10 @@
 			</select>
 			<input type='radio' value="{id:12, age:11}" v-model="canbeobject"/>
 			<br>
-			<input type='text' v-module.number="num"/>
+			<input type='text' v-model.number="num"/>
 			<p>num: {{num}}</p>
+			<input type='text' v-model.trip="astr"/>
+			<p>astr: {{astr}}</p>
 		</div>
 		<script>
 	
@@ -68,7 +70,8 @@
 					valuelist: [1,2,3],
 					valuelist_select: null,
 					canbeobject: null,
-					num: null
+					num: null,
+					astr: null
 				},
 				computed:{
 				},
@@ -82,6 +85,7 @@
 					console.log(this.checklist)
 					console.log(this.radiovalue)
 					console.log(this.selectlist)
+					console.log(typeof(this.num))
 				}
 			})
 		</script>

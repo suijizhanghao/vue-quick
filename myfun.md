@@ -54,3 +54,5 @@
 - 复选框的model，和点击顺序有关；复选select和 排列有关
 - value 的值是不是最好也使用v-bind？？？
 - radio checkbox 的value 竟然可以是object
+- v-model.number 如果是数值，则返回number类型；如果无法被parseFloat解析，则返回原始类型，可能是string，或者其他
+- v-model.trip：没写trip时，前后的空格竟然屏幕可能不会打印出来；但是确实被写入了变量中。
