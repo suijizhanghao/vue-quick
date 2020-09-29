@@ -7,10 +7,14 @@
 	</head>
 	<body>
 		<div id='app'>
-			<p>message {{a.join('a')}}</p>
+			<my1 v-on:my-event="vmfun1"></my1>
 		</div>
 		<script>
-	
+			Vue.component("my1", {
+				
+				template: "<p v-on:click='my-event'>abcd</p>",
+				
+			})
 			var vm = new Vue({
 				el: '#app',
 				data: {
@@ -19,11 +23,15 @@
 				computed:{
 				},
 				methods: {
-				
+					vmfun1(){
+						console.log("vmfun1...")
+					}
 				},
 				updated() {
 					
-				}
+				},
+
+				
 			})
 		</script>
 		
