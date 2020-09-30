@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id='app'>
+			<c-1 :value="value"></c-1>
+			<br>
+			<c-2 v-bind:v2="v2"></c-2>
+		</div>
+		<script>
+			var Com1 = {
+				props: ['value'],
+				template: "<p>value={{ value }}</p>"
+			}
+			var Com2 = {
+				components: {
+					'c1inc2': Com1
+				},
+				props: ['v2'],
+				template: "<c1inc2 v-bind:value='v2'></c1inc2>"
+			}
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					value: "aaa",
+					v2: "bbb"
+				},
+				computed:{
+				},
+				methods: {
+					
+				},
+				updated() {
+					
+				},
+				components: {
+					"c-1": Com1,
+					"c-2": Com2
+				}
+			})
+		</script>
+		
+	</body>
+</html>

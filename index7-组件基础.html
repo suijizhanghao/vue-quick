@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id='app'>
+			<mycomponent-1></mycomponent-1>
+			<mycomponent-1></mycomponent-1>
+			<mycomponent-1 v-bind:age='age' v-bind:name='name'></mycomponent-1>
+			<br>
+			<mycomponent-1 v-for="user in users" :age='user.age' :name='user.name' v-bind:key='user.age'></mycomponent-1>
+			<br>-------</br>
+			<div :style="{fontSize: postFontSize + 'em'}">
+				 <mytest-2
+				    v-for="post in posts"
+				    v-bind:key="post.id"
+				    v-bind:post="post"
+					v-on:enlarge-text="onEnlargeText"
+				  ></mytest-2>
+			</div>
+			<br>-------</br>
+			<div>
+				 <custom-input v-model="value"></custom-input>
+			</div>			
+		</div>
+		<script>
+			Vue.component("custom-input",{
+				props: ['value'],
+				template: `
+				<div>
+					<input v-bind:value="value"
+						  v-on:input="$emit('input', $event.target.value)"
+						  >
+						 <slot>something happended</slot>
+						 </div>`
+			})
+			Vue.component("mytest-2",{
+				props: ['post'],
+				template: `
+				    <div class="blog-post">
+				      <h3>{{ post.title }}</h3>
+					  <button v-on:click="$emit('enlarge-text', 0.1)">Enlarge text</button>
+				      <div v-html="post.content"></div>
+				    </div>
+				  `
+			})
+			Vue.component('mycomponent-1', {
+				props: ['age', 'name'],
+				data: function(){
+					return {
+						count: 0
+					}
+				},
+				template: "<p v-on:click='count++'>click 的次数: {{ count }}, age={{age}}, name={{name}} </p>"
+
+			})
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					age:11,
+					name: 'li',
+					users: [{age:1, name:'a'}, {age:2,name:'b'}],
+					aobject: {
+						v1: '111',
+						v2: '222'
+					},
+					posts:[{id:'1', title:'t1', content:'aaa'},{id:'2', title:'t2', content:'bbb'}],
+					postFontSize: 1,
+					value: null
+				},
+				computed:{
+				},
+				methods: {
+					onEnlargeText: function(value){
+						this.postFontSize += value
+ 					}
+					
+				},
+				updated() {
+					
+				}
+			})
+		</script>
+		
+	</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id='app'>
+			<c-1 :value-temp="value" :likes="likes"></c-1>
+			<br>
+		</div>
+		<script>
+			var Com1 = {
+				props: {
+					valueTemp: String,
+					// isPublished: Boolean,
+					// commentIds: Array,
+					// author: Object,
+					// callback: Function,
+					// contractsPromise: Promise,
+					likes: Number
+				},
+				template: `
+				 <div >
+					<p>valueTemp={{ valueTemp }}</p>
+					<p>likes={{ likes }}</p>
+				</div>
+				`
+			}
+
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					value: "aaa",
+					v2: "bbb",
+					likes: 123
+				},
+				computed:{
+				},
+				methods: {
+					
+				},
+				updated() {
+					
+				},
+				components: {
+					"c-1": Com1,
+				}
+			})
+		</script>
+		
+	</body>
+</html>
