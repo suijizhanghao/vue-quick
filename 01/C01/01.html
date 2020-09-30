@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div id="app1">
+<!-- 数据绑定是核心概念，复杂的事情概念就是这么的简单；无论是value 、properties等，理念就是这么的简单-->
+<!--    绑定，应当包括：value绑定，以及properties绑定，事件绑定，样式绑定，反正都是html的各种绑定-->
+    <p>{{ message }}</p>
+
+    <!--组件化，复用的基础，靠的就是这个东东，那么对于模板自身就有了更多的应用场景了-->
+    <my-fun1 my-fun1message="message"></my-fun1>
+</div>
+
+<script>
+    Vue.component("myFun1", {
+        props: ['myFun1message'],
+        template: "<p> my-fun1 component. Message: {{ myFun1message }}</p>",
+
+    });
+    const vm = new Vue({
+        el: "#app1",
+        data: {
+            message: "hello world",
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id='app'>
+			<my1 v-on:my-event="vmfun1"></my1>
+		</div>
+		<script>
+			Vue.component("my1", {
+				
+				template: "<p v-on:click='my-event'>abcd</p>",
+				
+			})
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					a: [1,2,3]
+				},
+				computed:{
+				},
+				methods: {
+					vmfun1(){
+						console.log("vmfun1...")
+					}
+				},
+				updated() {
+					
+				},
+
+				
+			})
+		</script>
+		
+	</body>
+</html>
